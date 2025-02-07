@@ -4,13 +4,11 @@ services:
       build:
         context: ./services/api
         dockerfile: Dockerfile
-      ports:
-        - "${API_PORT}:${API_PORT}"
       environment:
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
         - DB_HOST=mysql
-        - DB_USER=${MYSQL_USER}
-        - DB_PASSWORD=${MYSQL_PASSWORD}
-        - DB_NAME=${MYSQL_DATABASE}
         - API_PORT=${API_PORT}
       depends_on:
         mysql:
@@ -30,9 +28,9 @@ services:
         timeout: 10s
         retries: 15
       environment:
-        - MYSQL_DATABASE=${MYSQL_DATABASE}
         - MYSQL_USER=${MYSQL_USER}
         - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
         - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       networks:
         - app-network

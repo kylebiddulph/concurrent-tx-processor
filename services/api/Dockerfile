@@ -8,8 +8,4 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o main .
-
-EXPOSE ${API_PORT}
-
-CMD ["./main"]
+CMD ["go", "test", "-v", "./..."]
